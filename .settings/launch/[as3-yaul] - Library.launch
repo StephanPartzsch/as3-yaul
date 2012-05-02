@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="com.powerflasher.fdt.ui.CompcGroup">
+<stringAttribute key="ARGUMENTS" value=" -target-player={playerVersion}&#10; -include-sources={project}/src&#10; -externs = flashx.textLayout.formats:TextAlign"/>
+<stringAttribute key="LAUNCHER_DEPENDENCIES" value="[Self]"/>
+<stringAttribute key="OUTPUT" value="bin/as3-yaul.swc"/>
+<booleanAttribute key="PASS_CP" value="false"/>
+<booleanAttribute key="PASS_RSLS" value="false"/>
+<booleanAttribute key="PASS_SWCS" value="false"/>
+<stringAttribute key="PROJECT_NAME" value="as3-yaul"/>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+<listEntry value="/as3-yaul"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+<listEntry value="4"/>
+</listAttribute>
+</launchConfiguration>
