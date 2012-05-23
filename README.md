@@ -4,6 +4,10 @@ For the most part yaul consists of small classes or functions and it is quite ob
 Yaul contains so far the following functionality:  
 
 
+### browser
+* **getBrowserVersion** - return a BrowserVersion object which gives you the properties (appCodeName, appName, appVersion, cookieEnabled, platform, userAgent) from the browser navigator object.
+
+
 ### display
 
 * **ClickCatcher**  - a Sprite that listens for addedToStage, removedFromStage and resize events and  draws an invisible hitarea to catch all mouse events

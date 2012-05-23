@@ -1,5 +1,6 @@
 package
 {
+	import de.hopa.yaul.browser.BrowserVersionTest;
 	import org.flexunit.internals.TraceListener;
 	import org.flexunit.runner.FlexUnitCore;
 	import org.fluint.uiImpersonation.VisualTestEnvironmentBuilder;
@@ -17,7 +18,7 @@ package
 			core = new FlexUnitCore();
 			core.addListener( new TraceListener() );
 
-			core.run( TextUtilTestSuite );
+			core.runClasses( TextUtilTestSuite, BrowserVersionTest );
 		}
 	}
 }
