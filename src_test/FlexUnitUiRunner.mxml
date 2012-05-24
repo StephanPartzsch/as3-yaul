@@ -5,7 +5,7 @@
 
 	<fx:Script>
 		<![CDATA[
-			import de.hopa.yaul.browser.BrowserVersionTest;
+			import suite.MainTestSuite;
 
 			import org.flexunit.listeners.UIListener;
 			import org.flexunit.runner.FlexUnitCore;
@@ -21,7 +21,7 @@
 				
 				flexUnitCore = new FlexUnitCore();
 				flexUnitCore.addListener( new UIListener( testRunner ) );
-				flexUnitCore.runClasses( TextUtilTestSuite, BrowserVersionTest );
+				flexUnitCore.run( MainTestSuite );
 			}
 		]]>
 	</fx:Script>

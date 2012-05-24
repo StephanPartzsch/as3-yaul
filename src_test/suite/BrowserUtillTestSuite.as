@@ -1,5 +1,5 @@
 package
-{
+suite{
 	import de.hopa.yaul.browser.BrowserVersionTest;
 
 	[Suite]

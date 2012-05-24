@@ -1,5 +1,5 @@
 package
-{
+suite{
 	import de.hopa.util.yaul.CutTextToFitInTextFieldTest;
 	import de.hopa.util.yaul.DecreaseFontSizeToFitInTextFieldTest;
 	import de.hopa.util.yaul.FitTextInTextFieldTest;
