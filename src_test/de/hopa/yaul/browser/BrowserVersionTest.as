@@ -1,11 +1,19 @@
 package de.hopa.yaul.browser
 {
+	import de.hopa.yaul.test.hasValidSetterAndGetter;
+	import org.flexunit.assertThat;
 	import org.flexunit.asserts.assertEquals;
 
 	import flash.external.ExternalInterface;
 
 	public class BrowserVersionTest
 	{
+		[Test]
+		public function test_getter_and_setter() : void
+		{
+			assertThat( new BrowserVersion(), hasValidSetterAndGetter() );
+		}
+		
 		[Test]
 		public function test_get_browser_version() : void
 		{
