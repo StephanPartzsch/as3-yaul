@@ -13,24 +13,23 @@ package de.hopa.yaul.test
 
 		[Mock]
 		public var browserVersion : BrowserVersion;
-		
 
 		[Test]
 		public function test_should_get_and_set_properties_for_all_properties() : void
 		{
-			assertThat( new SetterGetterDummyObject(), hasValidSettersAndGetters() );
+			assertThat( new SetterGetterDummyObject(), hasValidSetterAndGetter() );
 		}
 		
 		[Test]
 		public function test_should_get_and_set_properties_for_specific_properties() : void
 		{
-			assertThat( new SetterGetterDummyObject(), hasValidSettersAndGettersFor( "fieldC", "fieldE" ) );
+			assertThat( new SetterGetterDummyObject(), hasValidSetterAndGetterFor( "fieldC", "fieldE" ) );
 		}
 
 		[Test]
 		public function test_should_get_and_set_properties_with_excluding_properties() : void
 		{
-			assertThat( new SetterGetterDummyObject(), hasValidSettersAndGettersExcluding( "fieldA", "fieldB") );
+			assertThat( new SetterGetterDummyObject(), hasValidSetterAndGetterExcluding( "fieldA", "fieldB") );
 		}
 	}
 }
