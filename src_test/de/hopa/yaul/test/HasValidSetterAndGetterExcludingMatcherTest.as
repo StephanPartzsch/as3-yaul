@@ -61,7 +61,7 @@ package de.hopa.yaul.test
 		}
 
 		[Test]
-		public function test_missmatch_description() : void
+		public function test_mismatch_description() : void
 		{
 			var matcher : Matcher = new HasValidSetterAndGetterExcludingMatcher( ["fieldA"] );
 			var description : Description = new StringDescription();
