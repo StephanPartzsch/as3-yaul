@@ -1,6 +1,5 @@
-package de.hopa.util.yaul
+package de.hopa.yaul.text
 {
-	import de.hopa.yaul.text.trim;
 	import org.flexunit.asserts.assertEquals;
 
 	public class TrimTest

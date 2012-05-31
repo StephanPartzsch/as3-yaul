@@ -1,6 +1,5 @@
-package de.hopa.util.yaul
+package de.hopa.yaul.text
 {
-	import de.hopa.yaul.text.decreaseFontSizeToFitInTextField;
 	import flash.text.TextField;
 	import flash.text.TextFormat;
 	import org.flexunit.asserts.assertEquals;
