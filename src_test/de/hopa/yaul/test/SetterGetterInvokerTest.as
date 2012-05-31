@@ -26,12 +26,21 @@ package de.hopa.yaul.test
 		}
 
 		[Test]
-		public function test_invoke_setter_and_getter_for() : void
+		public function test_invoke_setter_and_getter_for_one_property() : void
 		{
 			var testTarget : DummyObject = new DummyObject();
 			var setterGetterInvoker : SetterGetterInvoker = new SetterGetterInvoker( testTarget );
 
-			assertTrue( setterGetterInvoker.invokeSettersAndGettersFor( ["test"] ) );
+			assertTrue( setterGetterInvoker.invokeSettersAndGettersFor( ["fieldA"] ) );
+		}
+
+		[Test]
+		public function test_invoke_setter_and_getter_for_not_existing_property() : void
+		{
+			var testTarget : DummyObject = new DummyObject();
+			var setterGetterInvoker : SetterGetterInvoker = new SetterGetterInvoker( testTarget );
+
+			assertFalse( setterGetterInvoker.invokeSettersAndGettersFor( ["test"] ) );
 		}
 
 		[Test]

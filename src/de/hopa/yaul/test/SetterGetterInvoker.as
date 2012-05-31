@@ -17,6 +17,8 @@ package de.hopa.yaul.test
 		private var classInfo : ClassInfo;
 		private var methods : Array;
 		private var properties : Array;
+		
+		private var _currentFieldName : String;
 
 		public function SetterGetterInvoker( testTarget : Object )
 		{
@@ -27,6 +29,13 @@ package de.hopa.yaul.test
 			classInfo = ClassInfo.forInstance( testTarget );
 			methods = classInfo.getMethods();
 			properties = classInfo.getProperties();
+			
+			_currentFieldName = "";
+		}
+		
+		public function get currentFieldName() : String
+		{
+			return _currentFieldName;
 		}
 
 		public function invokeSettersAndGettersFor( fields : Array ) : Boolean
@@ -53,6 +62,7 @@ package de.hopa.yaul.test
 		{
 			for each ( var fieldName : String in fields )
 			{
+				_currentFieldName = fieldName;
 				LOG.debug( "Invoking getter/setter for " + fieldName );
 
 				try
@@ -102,7 +112,7 @@ package de.hopa.yaul.test
 				}
 			}
 
-			return null;
+			throw new Error( "Unable to invoke setter for field '" + fieldName + "'!" );
 		}
 
 		private function invokeGetter( fieldName : String ) : Object
@@ -117,7 +127,7 @@ package de.hopa.yaul.test
 				return method.invoke( testTarget, [] );
 			}
 
-			return null;
+			throw new Error( "Unable to invoke getter for field '" + fieldName + "'!" );
 		}
 
 		private function isProperty( fieldName : String ) : Boolean
