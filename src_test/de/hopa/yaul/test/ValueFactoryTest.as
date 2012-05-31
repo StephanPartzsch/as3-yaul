@@ -1,8 +1,8 @@
 package de.hopa.yaul.test
 {
+	import org.flexunit.assertThat;
 	import org.flexunit.asserts.assertEquals;
 	import org.flexunit.rules.IMethodRule;
-	import org.hamcrest.assertThat;
 	import org.hamcrest.object.instanceOf;
 	import org.mockito.integrations.flexunit4.MockitoRule;
 
