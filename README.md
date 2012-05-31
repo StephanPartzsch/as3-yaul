@@ -12,6 +12,36 @@ Yaul contains so far the following functionality:
 
 * **ClickCatcher**  - a Sprite that listens for addedToStage, removedFromStage and resize events and  draws an invisible hitarea to catch all mouse events
 
+### test 
+
+**Dependencies**
+The has getter/setter functions are compiled against *hamcrest-as3-only-1.1.3.swc*, *mockito-1.4M5.swc* and *spicelib-flash-2.4.0.swc*. The SWCs are included in the download file.
+
+* **hasValidSetterAndGetter** - tests if all getter and setter of an object work as expected
+* **hasValidSetterAndGetterExcluding** - tests if all getter and setter excluding given fields work as expected
+* **hasValidSetterAndGetterFor** - tests if all getter and setter for given fields work as expected
+
+All functions work with public properties, explicit and implicit getters and setters.
+
+**Usage**
+	[Test]
+	public function test_should_get_and_set_properties_for_all_properties() : void
+	{
+		assertThat( new MyObject(), hasValidSetterAndGetter() );
+	}
+
+	[Test]
+	public function test_should_get_and_set_properties_for_specific_properties() : void
+	{
+		assertThat( new MyObject(), hasValidSetterAndGetterFor( "fieldC", "fieldD" ) );
+	}
+
+	[Test]
+	public function test_should_get_and_set_properties_with_excluding_properties() : void
+	{
+		assertThat( new MyObject(), hasValidSetterAndGetterExcluding( "fieldA", "fieldB") );
+	}
+
 
 ### text 
 
