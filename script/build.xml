@@ -2,12 +2,10 @@
 
 	<property file="project.properties" />
 
-	<target name="properties">
-		<fail unless="FLEX_HOME">The "FLEX_HOME" property must be set in your global ANT properties!</fail>
-		<fail unless="EXECUTABLE_EXTENSION">The "EXECUTABLE_EXTENSION" property must be set in your global ANT properties!</fail>
-	</target>
+	<fail message="The 'FLEX_HOME' property must be set in your global ANT properties!" unless="FLEX_HOME"/>
+	<fail message="The 'EXECUTABLE_EXTENSION' property must be set in your global ANT properties!" unless="EXECUTABLE_EXTENSION"/>
 
-	<target name="[compile-swc]" description="creates" depends="properties">
+	<target name="[compile-swc]" description="creates">
 		<exec executable="${compc}" dir="${basedir}" failonerror="true">
 			<arg line="-o '${deploy.dir}/${binary.name}.swc'" />
 			<arg line="-sp '${src.dir}'" />
@@ -18,7 +16,7 @@
 		</exec>
 	</target>
 
-	<target name="[generate-asdoc]" description="Generate documentation" depends="properties">
+	<target name="[generate-asdoc]" description="Generate documentation">
 		<mkdir dir="${docs.local.dir}"/>
 		<delete includeemptydirs="true">
 			<fileset dir="${docs.local.dir}" includes="**/*" />
@@ -44,7 +42,9 @@
 		</copy>
 		<copy todir="${deploy.dir}/zip/dependencies">
 			<fileset dir="${libs.dir}">
-				<include name="as3-signals-v*.swc"/>
+				<include name="hamcrest-as3*.swc"/>
+				<include name="mockito-*.swc"/>
+				<include name="spicelib-flash-*.swc"/>
 			</fileset>
 		</copy>
 		<copy todir="${deploy.dir}/zip/docs">
