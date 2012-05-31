@@ -14,16 +14,18 @@ Yaul contains so far the following functionality:
 
 ### test 
 
-**Dependencies**
-The has getter/setter functions are compiled against *hamcrest-as3-only-1.1.3.swc*, *mockito-1.4M5.swc* and *spicelib-flash-2.4.0.swc*. The SWCs are included in the download file.
-
 * **hasValidSetterAndGetter** - tests if all getter and setter of an object work as expected
 * **hasValidSetterAndGetterExcluding** - tests if all getter and setter excluding given fields work as expected
 * **hasValidSetterAndGetterFor** - tests if all getter and setter for given fields work as expected
 
 All functions work with public properties, explicit and implicit getters and setters.
 
+**Dependencies**
+
+The has getter/setter functions are compiled against *hamcrest-as3-only-1.1.3.swc*, *mockito-1.4M5.swc* and *spicelib-flash-2.4.0.swc*. The SWCs are included in the download file.
+
 **Usage**
+
 	[Test]
 	public function test_should_get_and_set_properties_for_all_properties() : void
 	{
