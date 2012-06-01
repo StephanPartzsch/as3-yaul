@@ -45,7 +45,6 @@
 			<fileset dir="${libs.dir}">
 				<include name="hamcrest-as3*.swc"/>
 				<include name="mockito-*.swc"/>
-				<include name="spicelib-flash-*.swc"/>
 			</fileset>
 		</copy>
 		<copy todir="${deploy.dir}/zip/docs">

@@ -1,8 +1,8 @@
 package de.hopa.yaul.test
 {
+	import org.flemit.reflection.Type;
 	import org.hamcrest.Description;
 	import org.hamcrest.TypeSafeMatcher;
-	import org.spicefactory.lib.reflect.ClassInfo;
 
 	public class HasValidSetterAndGetterExcludingMatcher extends TypeSafeMatcher
 	{
@@ -32,7 +32,7 @@ package de.hopa.yaul.test
 		public override function describeMismatch( item : Object, mismatchDescription : Description ) : void
 		{
 			mismatchDescription
-				.appendText( 'Unable to match setter and getter results in class "' + ClassInfo.forInstance( item ).simpleName + '" for field: ' )
+				.appendText( 'Unable to match setter and getter results in class "' + Type.getType( item ).name + '" for field: ' )
 				.appendValue( setterGetterInvoker.currentFieldName );
 		}
 	}

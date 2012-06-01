@@ -1,36 +1,33 @@
 package de.hopa.yaul.test
 {
-	import org.spicefactory.lib.logging.LogContext;
-	import org.spicefactory.lib.logging.Logger;
-	import org.spicefactory.lib.reflect.ClassInfo;
-	import org.spicefactory.lib.reflect.Method;
-	import org.spicefactory.lib.reflect.Parameter;
-	import org.spicefactory.lib.reflect.Property;
+	import org.flemit.reflection.FieldInfo;
+	import org.flemit.reflection.MemberInfo;
+	import org.flemit.reflection.MethodInfo;
+	import org.flemit.reflection.ParameterInfo;
+	import org.flemit.reflection.PropertyInfo;
+	import org.flemit.reflection.Type;
 
 	public class SetterGetterInvoker
 	{
-		private static const LOG : Logger = LogContext.getLogger( SetterGetterInvoker );
-		
 		private var testTarget : Object;
 		private var valueFactory : ValueFactory;
 
-		private var classInfo : ClassInfo;
+		private var _currentFieldName : String;
+		
+		private var classTypeInfo : Type;
 		private var methods : Array;
 		private var properties : Array;
 		
-		private var _currentFieldName : String;
 
 		public function SetterGetterInvoker( testTarget : Object )
 		{
 			this.testTarget = testTarget;
 
 			valueFactory = new ValueFactory();
-
-			classInfo = ClassInfo.forInstance( testTarget );
-			methods = classInfo.getMethods();
-			properties = classInfo.getProperties();
 			
 			_currentFieldName = "";
+
+			initializeReflectionInformation( testTarget );
 		}
 		
 		public function get currentFieldName() : String
@@ -47,7 +44,7 @@ package de.hopa.yaul.test
 		{
 			var classFields : Array = getClassFields();
 
-			var fields : Array = new Array();
+			var fields : Array = [];
 
 			for each ( var fieldName : String in classFields )
 			{
@@ -58,12 +55,28 @@ package de.hopa.yaul.test
 			return invokeSettersAndGetters( fields );
 		}
 
+		private function initializeReflectionInformation( testTarget : Object ) : void
+		{
+			classTypeInfo = Type.getType( testTarget );
+			var members : Array = classTypeInfo.getMembers();
+
+			properties = [];
+			methods = [];
+
+			for each ( var member : MemberInfo in members )
+			{
+				if ( member is MethodInfo )
+					methods.push( member );
+				else
+					properties.push( member );
+			}
+		}
+
 		private function invokeSettersAndGetters( fields : Array ) : Boolean
 		{
 			for each ( var fieldName : String in fields )
 			{
 				_currentFieldName = fieldName;
-				LOG.debug( "Invoking getter/setter for " + fieldName );
 
 				try
 				{
@@ -71,14 +84,10 @@ package de.hopa.yaul.test
 					var result : Object = invokeGetter( fieldName );
 
 					if ( testValue != result )
-					{
-						LOG.error( "Getter result did not match set value for field: {0}", fieldName );
 						return false;
-					}
 				}
 				catch( error : Error )
 				{
-					LOG.error( "Unable to invoke both getter and setter for {0}! Error: {1}", fieldName, error.getStackTrace() );
 					return false;
 				}
 			}
@@ -89,10 +98,10 @@ package de.hopa.yaul.test
 		private function invokeSetter( fieldName : String ) : Object
 		{
 			var testValue : Object;
-			
+
 			if ( isProperty( fieldName ) )
 			{
-				testValue = valueFactory.createValue( classInfo.getProperty( fieldName ).type.getClass() );
+				testValue = valueFactory.createValue( getClassForMemberInfo( classTypeInfo.getMember( fieldName ) ) );
 				
 				testTarget[fieldName] = testValue;
 				
@@ -100,13 +109,14 @@ package de.hopa.yaul.test
 			}
 			else if ( isMethod( fieldName ) )
 			{
-				var method : Method = classInfo.getMethod( "set" + getCapitalizedFieldName( fieldName ) );
+				var methodInfo : MethodInfo = classTypeInfo.getMember( "set" + getCapitalizedFieldName( fieldName ) ) as MethodInfo;
 				
-				testValue = valueFactory.createValue( Parameter( method.parameters[0] ).type.getClass() );
+				testValue = valueFactory.createValue( getClassForMemberInfo( methodInfo ) );
 
-				if ( method.parameters.length == 1 )
+				if ( methodInfo.parameters.length == 1 )
 				{
-					method.invoke( testTarget, [testValue] );
+					var setterFunction : Function = testTarget[methodInfo.name];
+					setterFunction.call( testTarget, testValue );
 				
 					return testValue;
 				}
@@ -123,8 +133,9 @@ package de.hopa.yaul.test
 			}
 			else if ( isMethod( fieldName ) )
 			{
-				var method : Method = classInfo.getMethod( "get" + getCapitalizedFieldName( fieldName ) );
-				return method.invoke( testTarget, [] );
+				var methodInfo : MethodInfo = classTypeInfo.getMember( "get" + getCapitalizedFieldName( fieldName ) ) as MethodInfo;
+				var getterFunction : Function = testTarget[methodInfo.name];
+				return getterFunction.call( testTarget );
 			}
 
 			throw new Error( "Unable to invoke getter for field '" + fieldName + "'!" );
@@ -132,9 +143,9 @@ package de.hopa.yaul.test
 
 		private function isProperty( fieldName : String ) : Boolean
 		{
-			for each ( var property : Property in properties )
+			for each ( var propertyInfo : MemberInfo in properties )
 			{
-				if ( property.name == fieldName )
+				if ( propertyInfo.name == fieldName )
 					return true;
 			}
 
@@ -143,15 +154,29 @@ package de.hopa.yaul.test
 
 		private function isMethod( fieldName : String ) : Boolean
 		{
-			for each ( var method : Method in methods )
+			for each ( var methodInfo : MethodInfo in methods )
 			{
-				if ( method.name.substring( 3 ).toLowerCase() == fieldName.toLowerCase() )
+				if ( methodInfo.name.substring( 3 ).toLowerCase() == fieldName.toLowerCase() )
 					return true;
 			}
 
 			return false;
 		}
 
+		private function getClassForMemberInfo( memberInfo : MemberInfo ) : Class
+		{
+			var clazz : Class;
+			
+			if ( memberInfo is PropertyInfo )
+				clazz = PropertyInfo( memberInfo ).type.classDefinition;
+			else if ( memberInfo is FieldInfo )
+				clazz = FieldInfo( memberInfo ).type.classDefinition;
+			else if ( memberInfo is MethodInfo )
+				clazz = ParameterInfo( MethodInfo( memberInfo ).parameters[0] ).type.classDefinition;
+			
+			return clazz;
+		}
+		
 		private function getCapitalizedFieldName( fieldName : String ) : String
 		{
 			return fieldName.charAt( 0 ).toUpperCase() + fieldName.substring( 1 );
@@ -159,15 +184,15 @@ package de.hopa.yaul.test
 		
 		private function getClassFields() : Array
 		{
-			var fields : Array = new Array();
+			var fields : Array = [];
 			
-			for each ( var property : Property in properties )
-				fields.push( property.name );
+			for each ( var propertyInfo : MemberInfo in properties )
+				fields.push( propertyInfo.name );
 				
-			for each ( var method : Method in methods )
+			for each ( var methodInfo : MethodInfo in methods )
 			{
-				if ( method.name.substr( 0, 3 ) == "set" )
-					fields.push( method.name.charAt( 3 ).toLowerCase() + method.name.substring( 4 ) );
+				if ( methodInfo.name.substr( 0, 3 ) == "set" )
+					fields.push( methodInfo.name.charAt( 3 ).toLowerCase() + methodInfo.name.substring( 4 ) );
 			}
 			
 			return fields;
