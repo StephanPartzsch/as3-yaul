@@ -1,4 +1,4 @@
-package de.hopa.yaul.test
+package de.hopa.yaul.test.dummy
 {
 	import de.hopa.yaul.browser.BrowserVersion;
 

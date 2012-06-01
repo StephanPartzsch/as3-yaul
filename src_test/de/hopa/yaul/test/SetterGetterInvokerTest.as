@@ -1,5 +1,6 @@
 package de.hopa.yaul.test
 {
+	import de.hopa.yaul.test.dummy.SetterGetterDummyObject;
 	import org.flexunit.asserts.assertFalse;
 	import org.flexunit.asserts.assertNotNull;
 	import org.flexunit.asserts.assertNull;
@@ -84,7 +85,7 @@ package de.hopa.yaul.test
 	}
 }
 
-import de.hopa.yaul.test.SetterGetterDummyObject;
+import de.hopa.yaul.test.dummy.SetterGetterDummyObject;
 
 internal class DummyObject
 {

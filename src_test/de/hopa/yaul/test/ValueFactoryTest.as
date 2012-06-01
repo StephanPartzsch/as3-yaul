@@ -1,7 +1,10 @@
 package de.hopa.yaul.test
 {
+	import de.hopa.yaul.test.dummy.DummyObjectWithConstructorArguments;
+	import de.hopa.yaul.test.dummy.SetterGetterDummyObject;
 	import org.flexunit.assertThat;
 	import org.flexunit.asserts.assertEquals;
+	import org.flexunit.asserts.assertNotNull;
 	import org.flexunit.rules.IMethodRule;
 	import org.hamcrest.object.instanceOf;
 	import org.mockito.integrations.flexunit4.MockitoRule;
@@ -13,6 +16,10 @@ package de.hopa.yaul.test
 		
 		[Mock]
 		public var setterGetterDummyObject : SetterGetterDummyObject;
+		
+		[Mock(argsList="constructorArgs")]
+		public var dummyObjectWithConstructorArguments : DummyObjectWithConstructorArguments;
+		public var constructorArgs : Array = [ 5, "test", setterGetterDummyObject ];
 		
 		private var valueFactory : ValueFactory;
 		
@@ -42,6 +49,16 @@ package de.hopa.yaul.test
 		public function test_create_value_for_non_primitive() : void
 		{
 			assertThat( "unexpected type for DummyObject", valueFactory.createValue( SetterGetterDummyObject ), instanceOf( SetterGetterDummyObject ) );
+		}
+		
+		[Test]
+		public function test_create_value_for_non_primitive_with_constructor_arguments() : void
+		{
+			var expectedObject : DummyObjectWithConstructorArguments = valueFactory.createValue( DummyObjectWithConstructorArguments ) as DummyObjectWithConstructorArguments;
+			assertThat( "unexpected type for DummyObject", expectedObject, instanceOf( DummyObjectWithConstructorArguments ) );
+			assertEquals( "unexpected value for int", -15, expectedObject.valueOne );
+			assertEquals( "unexpected value for String", "test", expectedObject.valueTwo );
+			assertNotNull( "unexpected value for DummyObjectWithConstructorArguments", expectedObject.valueThree );
 		}
 	}
 }

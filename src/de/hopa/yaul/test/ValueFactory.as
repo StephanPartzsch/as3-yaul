@@ -1,6 +1,7 @@
 package de.hopa.yaul.test
 {
 	import org.flemit.reflection.DescribeTypeTypeProvider;
+	import org.flemit.reflection.ParameterInfo;
 	import org.flemit.reflection.Type;
 	import org.mockito.integrations.currentMockito;
 
@@ -25,8 +26,23 @@ package de.hopa.yaul.test
 		{
 			if ( isPrimitive( clazz ) )
 				return typeValues[clazz];
+				
+			var arguments : Array = createDummyArgumentsForClass( clazz );
 
-			return currentMockito.mock( clazz );
+			return currentMockito.mock( clazz, null, arguments );
+		}
+
+		private function createDummyArgumentsForClass( clazz : Class ) : Array
+		{
+			var arguments : Array = [];
+			
+			var classTypeInfo : Type = new DescribeTypeTypeProvider().getType( clazz, ApplicationDomain.currentDomain );
+			var constructorParameters : Array = classTypeInfo.constructor.parameters;
+			
+			for each ( var parameter : ParameterInfo in constructorParameters )
+				arguments.push( createValue( parameter.type.classDefinition ) );
+			
+			return arguments;
 		}
 
 		private function isPrimitive( clazz : Class ) : Boolean
@@ -36,9 +52,7 @@ package de.hopa.yaul.test
 
 		private function isClass( clazz : Class, expectedClazz : Class ) : Boolean
 		{
-			var dsescribeTypeTypeProvider : DescribeTypeTypeProvider = new DescribeTypeTypeProvider();
-			
-			var classType : Type = dsescribeTypeTypeProvider.getType( clazz, ApplicationDomain.currentDomain );
+			var classType : Type = new DescribeTypeTypeProvider().getType( clazz, ApplicationDomain.currentDomain );
 			var baseClasses : Array = getBaseClassesForType( classType );
 			var interfaces : Array = classType.getInterfaces();
 			

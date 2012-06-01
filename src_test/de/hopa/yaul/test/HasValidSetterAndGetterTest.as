@@ -1,10 +1,11 @@
 package de.hopa.yaul.test
 {
 	import de.hopa.yaul.browser.BrowserVersion;
-
+	import de.hopa.yaul.test.dummy.SetterGetterDummyObject;
 	import org.flexunit.assertThat;
 	import org.flexunit.rules.IMethodRule;
 	import org.mockito.integrations.flexunit4.MockitoRule;
+
 
 	public class HasValidSetterAndGetterTest
 	{
