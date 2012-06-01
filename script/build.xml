@@ -5,7 +5,7 @@
 	<fail message="The 'FLEX_HOME' property must be set in your global ANT properties!" unless="FLEX_HOME"/>
 	<fail message="The 'EXECUTABLE_EXTENSION' property must be set in your global ANT properties!" unless="EXECUTABLE_EXTENSION"/>
 
-	<target name="[compile-swc]" description="creates">
+	<target name="[compile-swc]" description="creates as3-yaul library">
 		<exec executable="${compc}" dir="${basedir}" failonerror="true">
 			<arg line="-o '${deploy.dir}/${binary.name}.swc'" />
 			<arg line="-sp '${src.dir}'" />
@@ -26,6 +26,7 @@
 			<arg line="-l '${libs.dir}'" />
 			<arg line="-sp '${src.dir}'" />
 			<arg line="-ds '${src.dir}' " />
+			<arg line="-l '${flex.lib.dir}' " />
 			<arg line="-target-player ${target.player}" />
 			<arg line="-window-title 'Adobe ActionScript 3.0 Library - ${project.title}'" />
 		</exec>
