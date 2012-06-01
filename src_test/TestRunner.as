@@ -1,10 +1,13 @@
 package
 {
+	import suite.MainTestSuite;
+
 	import org.flexunit.internals.TraceListener;
 	import org.flexunit.runner.FlexUnitCore;
 	import org.fluint.uiImpersonation.VisualTestEnvironmentBuilder;
 
 	import flash.display.Sprite;
+
 
 	public class TestRunner extends Sprite
 	{
@@ -17,7 +20,7 @@ package
 			core = new FlexUnitCore();
 			core.addListener( new TraceListener() );
 
-			core.run( TextUtilTestSuite );
+			core.run( MainTestSuite );
 		}
 	}
 }

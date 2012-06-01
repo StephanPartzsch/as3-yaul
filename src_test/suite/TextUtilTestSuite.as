@@ -1,9 +1,9 @@
 package
-{
-	import de.hopa.util.yaul.CutTextToFitInTextFieldTest;
-	import de.hopa.util.yaul.DecreaseFontSizeToFitInTextFieldTest;
-	import de.hopa.util.yaul.FitTextInTextFieldTest;
-	import de.hopa.util.yaul.TrimTest;
+suite{
+	import de.hopa.yaul.text.CutTextToFitInTextFieldTest;
+	import de.hopa.yaul.text.DecreaseFontSizeToFitInTextFieldTest;
+	import de.hopa.yaul.text.FitTextInTextFieldTest;
+	import de.hopa.yaul.text.TrimTest;
 
 	[Suite]
 	[RunWith("org.flexunit.runners.Suite")]
