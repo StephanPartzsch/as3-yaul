@@ -4,15 +4,15 @@ For the most part yaul consists of small classes or functions and it is quite ob
 Yaul contains so far the following functionality:  
 
 
-### browser
+### package browser
 * **getBrowserVersion** - return a BrowserVersion object which gives you the properties (appCodeName, appName, appVersion, cookieEnabled, platform, userAgent) from the browser navigator object.
 
 
-### display
+### package display
 
 * **ClickCatcher**  - a Sprite that listens for addedToStage, removedFromStage and resize events and  draws an invisible hitarea to catch all mouse events
 
-### test 
+### package test 
 
 * **hasValidSetterAndGetter** - tests if all getter and setter of an object work as expected
 * **hasValidSetterAndGetterExcluding** - tests if all getter and setter excluding given fields work as expected
@@ -22,7 +22,7 @@ All functions work with public properties, explicit and implicit getters/setters
 
 **Dependencies**
 
-The has valid getter/setter functions are compiled against *hamcrest-as3-only-1.1.3.swc*, *mockito-1.4M5.swc* and *spicelib-flash-2.4.0.swc*. The SWCs are included in the [download file](https://github.com/StephanPartzsch/as3-yaul/downloads).
+The 'has valid getter/setter' functions are compiled against *hamcrest-as3-only-1.1.3.swc*, *mockito-1.4M5.swc* and *spicelib-flash-2.4.0.swc*. The SWCs are included in the [download file](https://github.com/StephanPartzsch/as3-yaul/downloads).
 
 **Usage**
 
@@ -45,7 +45,7 @@ The has valid getter/setter functions are compiled against *hamcrest-as3-only-1.
 	}
 
 
-### text 
+### package text 
 
 * **cutTextToFitInTextField**  - cuts a given text and extend it with three dots (...) so that it fits in a text field with a fixed width 
 * **decreaseFontSizeToFitInTextField**  - decreases the font size of a given text so that it fits into a text field 
