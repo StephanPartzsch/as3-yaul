@@ -20,17 +20,58 @@ package de.hopa.yaul.browser
 			var prepareBrowserVersionTest : XML = <![CDATA[
 			function( ) 
 			{ 
-				__defineGetter__('navigator', 
-				function()
+				try
 				{
-	    			return {	appCodeName:"TestAppCodeName", 
-								appName:"TestAppName",
-								appVersion:"TestAppVersion",
-								cookieEnabled:"false",
-								platform:"TestPlatform",
-								userAgent:"TestUserAgent"
-							};
-				});
+					window.__defineGetter__('navigator', 
+					function()
+					{
+		    			return {	appCodeName:"TestAppCodeName", 
+									appName:"TestAppName",
+									appVersion:"TestAppVersion",
+									cookieEnabled:"false",
+									platform:"TestPlatform",
+									userAgent:"TestUserAgent"
+								};
+					});
+				}
+				catch( e )
+				{
+					navigator.__defineGetter__('appCodeName', 
+					function()
+					{
+		    			return "TestAppCodeName"; 
+					});
+					
+					navigator.__defineGetter__('appName', 
+					function()
+					{
+		    			return "TestAppName"; 
+					});
+					
+					navigator.__defineGetter__('appVersion', 
+					function()
+					{
+		    			return "TestAppVersion"; 
+					});
+					
+					navigator.__defineGetter__('cookieEnabled', 
+					function()
+					{
+		    			return "false"; 
+					});
+					
+					navigator.__defineGetter__('platform', 
+					function()
+					{
+		    			return "TestPlatform"; 
+					});
+					
+					navigator.__defineGetter__('userAgent', 
+					function()
+					{
+		    			return "TestUserAgent"; 
+					});
+				}
 			}
 			]]>;
 
