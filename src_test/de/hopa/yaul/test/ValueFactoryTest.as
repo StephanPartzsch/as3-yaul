@@ -1,7 +1,9 @@
 package de.hopa.yaul.test
 {
+	import de.hopa.yaul.test.dummy.DummyInterface;
 	import de.hopa.yaul.test.dummy.DummyObjectWithConstructorArguments;
 	import de.hopa.yaul.test.dummy.SetterGetterDummyObject;
+
 	import org.flexunit.assertThat;
 	import org.flexunit.asserts.assertEquals;
 	import org.flexunit.asserts.assertNotNull;
@@ -16,6 +18,9 @@ package de.hopa.yaul.test
 		
 		[Mock]
 		public var setterGetterDummyObject : SetterGetterDummyObject;
+		
+		[Mock]
+		public var dummyInterface : DummyInterface;
 		
 		[Mock(argsList="constructorArgs")]
 		public var dummyObjectWithConstructorArguments : DummyObjectWithConstructorArguments;
@@ -59,6 +64,14 @@ package de.hopa.yaul.test
 			assertEquals( "unexpected value for int", -15, expectedObject.valueOne );
 			assertEquals( "unexpected value for String", "test", expectedObject.valueTwo );
 			assertNotNull( "unexpected value for DummyObjectWithConstructorArguments", expectedObject.valueThree );
+		}
+		
+		[Test]
+		public function test_create_value_for_interface() : void
+		{
+			var expectedObject : DummyInterface = valueFactory.createValue( DummyInterface ) as DummyInterface;
+			
+			assertThat( "unexpected type for DummyInterface", expectedObject, instanceOf( DummyInterface ) );
 		}
 	}
 }

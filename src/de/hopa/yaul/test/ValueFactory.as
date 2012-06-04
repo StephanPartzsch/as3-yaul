@@ -65,9 +65,9 @@ package de.hopa.yaul.test
 					return true;
 			}
 				
-			for each ( var classInterface : Class in interfaces ) 
+			for each ( var classInterfaceType : Type in interfaces ) 
 			{
-				if ( classInterface == expectedClazz )
+				if ( classInterfaceType.classDefinition == expectedClazz )
 					return true;
 			}
 				
