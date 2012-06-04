@@ -3,6 +3,8 @@ This collection of classes and functions is yet another util library for ActionS
 For the most part yaul consists of small classes or functions and it is quite obvious how to use them. Some of the resources come with examples to demonstrate their usage. 
 Yaul contains so far the following functionality:  
 
+***
+
 
 ### package browser
 * **getBrowserVersion** - return a BrowserVersion object which gives you the properties (appCodeName, appName, appVersion, cookieEnabled, platform, userAgent) from the browser navigator object.
@@ -51,3 +53,10 @@ The 'has valid getter/setter' functions are compiled against *hamcrest-as3-only-
 * **decreaseFontSizeToFitInTextField**  - decreases the font size of a given text so that it fits into a text field 
 * **fitTextInTextField**  - fits a given text into a text field by decreasing the font size (up to a minimal font size) and cutting the text with an extension of three dots (...)  
 * **trim**  - trims whitespace from a string
+
+***
+
+
+### Developer
+
+The 'as3-yaul' was developed by [Stephan Partzsch](https://github.com/StephanPartzsch/) and [Peter Höche](https://github.com/PeterHoeche/).
