@@ -17,7 +17,7 @@
 	<fail message="The 'GITHUB_USER' property must be set in your global ANT properties!" unless="GITHUB_USER" />
 	<fail message="The 'GITHUB_USER_PASSWORD' property must be set in your global ANT properties!" unless="GITHUB_USER_PASSWORD" />
 
-	<target name="[compile-swc]" description="creates as3-yaul library">
+	<target name="[compile-swc]" description="create as3-yaul library">
 		<exec executable="${compc}" dir="${basedir}" failonerror="true">
 			<arg line="-o '${deploy.dir}/${binary.name}.swc'" />
 			<arg line="-sp '${src.dir}'" />
@@ -29,7 +29,7 @@
 		</exec>
 	</target>
 
-	<target name="[generate-asdoc]" description="Generate documentation">
+	<target name="[generate-asdoc]" description="generate documentation">
 		<mkdir dir="${docs.local.dir}" />
 		<delete includeemptydirs="true">
 			<fileset dir="${docs.local.dir}" includes="**/*" />
