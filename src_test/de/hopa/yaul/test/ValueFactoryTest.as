@@ -11,6 +11,8 @@ package de.hopa.yaul.test
 	import org.hamcrest.object.instanceOf;
 	import org.mockito.integrations.flexunit4.MockitoRule;
 
+	import flash.display.DisplayObject;
+
 	public class ValueFactoryTest
 	{
 		[Rule]
@@ -69,9 +71,19 @@ package de.hopa.yaul.test
 		[Test]
 		public function test_create_value_for_interface() : void
 		{
-			var expectedObject : DummyInterface = valueFactory.createValue( DummyInterface ) as DummyInterface;
-			
-			assertThat( "unexpected type for DummyInterface", expectedObject, instanceOf( DummyInterface ) );
+			assertThat( "unexpected type for DummyInterface", valueFactory.createValue( DummyInterface ), instanceOf( DummyInterface ) );
+		}
+		
+		[Test]
+		public function test_create_value_for_display_object() : void
+		{
+			assertThat( "unexpected type for DisplayObject", valueFactory.createValue( DisplayObject ), instanceOf( DisplayObject ) );
+		}
+		
+		[Test]
+		public function test_create_value_for_function() : void
+		{
+			assertThat( "unexpected type for DisplayObject", valueFactory.createValue( Function ), instanceOf( Function ) );
 		}
 	}
 }

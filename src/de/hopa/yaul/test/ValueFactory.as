@@ -5,6 +5,8 @@ package de.hopa.yaul.test
 	import org.flemit.reflection.Type;
 	import org.mockito.integrations.currentMockito;
 
+	import flash.display.DisplayObject;
+	import flash.display.Sprite;
 	import flash.system.ApplicationDomain;
 	import flash.utils.Dictionary;
 
@@ -20,6 +22,8 @@ package de.hopa.yaul.test
 			typeValues[uint] = 150;
 			typeValues[Number] = 1.5;
 			typeValues[Boolean] = true;
+			typeValues[DisplayObject] = new Sprite();
+			typeValues[Function] = new Function();
 		}
 
 		public function createValue( clazz : Class ) : Object
@@ -47,7 +51,13 @@ package de.hopa.yaul.test
 
 		private function isPrimitive( clazz : Class ) : Boolean
 		{
-			return isClass( clazz, String ) || isClass( clazz, int ) || isClass( clazz, uint ) || isClass( clazz, Number ) || isClass( clazz, Boolean );
+			return isClass( clazz, String ) 
+				|| isClass( clazz, int ) 
+				|| isClass( clazz, uint ) 
+				|| isClass( clazz, Number ) 
+				|| isClass( clazz, Boolean ) 
+				|| isClass( clazz, DisplayObject )
+				|| isClass( clazz, Function );
 		}
 
 		private function isClass( clazz : Class, expectedClazz : Class ) : Boolean
