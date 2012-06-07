@@ -78,7 +78,7 @@ package de.hopa.yaul.test
 		{
 			var matcher : Matcher = new HasValidSetterAndGetterExcludingMatcher( ["fieldA", "fieldC"] );
 			var description : Description = new StringDescription();
-			var expectedDescription : String = 'Unable to match setter and getter results in class "NotMatchDummyObject" because testable fields has to be writable and readable!';
+			var expectedDescription : String = 'Unable to match setter and getter results in class "NotMatchDummyObject" because testable fields has to be writable, readable and not static!';
 
 			matcher.matches( shouldNotMatchObject );
 			description.appendMismatchOf( matcher, shouldNotMatchObject );

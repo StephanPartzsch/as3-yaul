@@ -33,7 +33,7 @@ package de.hopa.yaul.test
 		{
 			if ( setterGetterInvoker.currentFieldName == "" )
 				mismatchDescription
-					.appendText( 'Unable to match setter and getter results in class "' + Type.getType( item ).name + '" because testable fields has to be writable and readable!' );
+					.appendText( 'Unable to match setter and getter results in class "' + Type.getType( item ).name + '" because testable fields has to be writable, readable and not static!' );
 			else
 				mismatchDescription
 					.appendText( 'Unable to match setter and getter results in class "' + Type.getType( item ).name + '" for field: ' )

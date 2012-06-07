@@ -1,5 +1,6 @@
 package de.hopa.yaul.test
 {
+	import flash.utils.describeType;
 	import org.flemit.reflection.FieldInfo;
 	import org.flemit.reflection.MemberInfo;
 	import org.flemit.reflection.MethodInfo;
@@ -191,7 +192,9 @@ package de.hopa.yaul.test
 			
 			for each ( var propertyInfo : MemberInfo in properties )
 			{
-				if ( !( propertyInfo is PropertyInfo ) )
+				if ( propertyInfo.isStatic || isConstant( propertyInfo ) )
+					continue;
+				else if ( !( propertyInfo is PropertyInfo ) )
 					fields.push( propertyInfo.name );
 				else if ( PropertyInfo( propertyInfo ).canWrite )
 					fields.push( propertyInfo.name );
@@ -204,6 +207,19 @@ package de.hopa.yaul.test
 			}
 			
 			return fields;
+		}
+		
+		private function isConstant( memberInfo : MemberInfo ) : Boolean
+		{
+			var description : XML = describeType( memberInfo.owner.classDefinition );
+			
+			for each ( var constant : XML in description..constant )
+			{
+				if ( constant.@name == memberInfo.name )
+					return true;
+			}
+					
+			return false;
 		}
 	}
 }

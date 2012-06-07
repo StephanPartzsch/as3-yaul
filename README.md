@@ -24,9 +24,11 @@ All functions work with public properties, explicit and implicit getters/setters
 
 **Dependencies**
 
-The 'has valid getter/setter' functions are compiled against *hamcrest-as3-only-1.1.3.swc* and *mockito-1.4M5.swc*. The SWCs are included in the [download file](https://github.com/StephanPartzsch/as3-yaul/downloads).
+The 'has valid setter/getter' functions are compiled against *hamcrest-as3-only-1.1.3.swc* and *mockito-1.4M5.swc*. The SWCs are included in the [download file](https://github.com/StephanPartzsch/as3-yaul/downloads).
 
 **Usage**
+
+The properties of your class have to be writable, readable, not static and not const to be tested automaticly by the 'has valid setter/getter' functions. Readonly, static and const properties are excluded by default from the matching process.
 
 	[Test]
 	public function test_should_get_and_set_properties_for_all_properties() : void
