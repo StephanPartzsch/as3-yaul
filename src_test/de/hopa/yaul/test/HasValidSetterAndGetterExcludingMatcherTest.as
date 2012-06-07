@@ -30,7 +30,7 @@ package de.hopa.yaul.test
 		public function test_matches_object_for_three_fields() : void
 		{
 			var matcher : Matcher = new HasValidSetterAndGetterExcludingMatcher( ["fieldA", "fieldB", "fieldC"] );
-			assertTrue( "unexpected match result", matcher.matches( shouldMatchObject ) );
+			assertFalse( "unexpected match result", matcher.matches( shouldMatchObject ) );
 		}
 
 		[Test]
@@ -71,6 +71,20 @@ package de.hopa.yaul.test
 			description.appendMismatchOf( matcher, shouldNotMatchObject );
 
 			assertEquals( "Unexpected mismatch description", expectedDescription, description.toString() );
+		}
+		
+		[Test]
+		public function test_mismatch_description_with_no_writable_fields() : void
+		{
+			var matcher : Matcher = new HasValidSetterAndGetterExcludingMatcher( ["fieldA", "fieldC"] );
+			var description : Description = new StringDescription();
+			var expectedDescription : String = 'Unable to match setter and getter results in class "NotMatchDummyObject" because testable fields has to be writable and readable!';
+
+			matcher.matches( shouldNotMatchObject );
+			description.appendMismatchOf( matcher, shouldNotMatchObject );
+
+			assertEquals( "Unexpected mismatch description", expectedDescription, description.toString() );
+			
 		}
 	}
 }

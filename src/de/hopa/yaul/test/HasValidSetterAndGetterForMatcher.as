@@ -31,9 +31,13 @@ package de.hopa.yaul.test
 		
 		public override function describeMismatch( item : Object, mismatchDescription : Description ) : void
 		{
-			mismatchDescription
-				.appendText( 'Unable to match setter and getter results in class "' + Type.getType( item ).name + '" for field: ' )
-				.appendValue( setterGetterInvoker.currentFieldName );
+			if ( setterGetterInvoker.currentFieldName == "" )
+				mismatchDescription
+					.appendText( 'Unable to match setter and getter results in class "' + Type.getType( item ).name + '" because testable fields has to be writable and readable!' );
+			else
+				mismatchDescription
+					.appendText( 'Unable to match setter and getter results in class "' + Type.getType( item ).name + '" for field: ' )
+					.appendValue( setterGetterInvoker.currentFieldName );
 		}
 	}
 }

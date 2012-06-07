@@ -72,6 +72,20 @@ package de.hopa.yaul.test
 
 			assertEquals( "Unexpected mismatch description", expectedDescription, description.toString() );
 		}
+		
+		[Test]
+		public function test_mismatch_description_with_no_writable_fields() : void
+		{
+			var matcher : Matcher = new HasValidSetterAndGetterForMatcher( [] );
+			var description : Description = new StringDescription();
+			var expectedDescription : String = 'Unable to match setter and getter results in class "NotMatchDummyObject" because testable fields has to be writable and readable!';
+
+			matcher.matches( shouldNotMatchObject );
+			description.appendMismatchOf( matcher, shouldNotMatchObject );
+
+			assertEquals( "Unexpected mismatch description", expectedDescription, description.toString() );
+			
+		}
 	}
 }
 

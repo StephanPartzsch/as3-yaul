@@ -1,6 +1,7 @@
 package de.hopa.yaul.test
 {
 	import de.hopa.yaul.test.dummy.SetterGetterDummyObject;
+
 	import org.flexunit.asserts.assertFalse;
 	import org.flexunit.asserts.assertNotNull;
 	import org.flexunit.asserts.assertNull;
@@ -82,6 +83,15 @@ package de.hopa.yaul.test
 			assertTrue( dummyObject.fieldE );
 			assertNotNull( dummyObject.setterGetterDummy );
 		}
+		
+		[Test]
+		public function test_invoke_setter_and_getter_for_class_with_read_only_properties() : void
+		{
+			var testTarget : DummyObjectWithReadOnlyProperty = new DummyObjectWithReadOnlyProperty();
+			var setterGetterInvoker : SetterGetterInvoker = new SetterGetterInvoker( testTarget );
+			
+			assertFalse( setterGetterInvoker.invokeSettersAndGettersExcluding( [] ) );
+		}
 	}
 }
 
@@ -126,5 +136,15 @@ internal class DummyObject
 	public function getFieldC() : int
 	{
 		return _fieldC;
+	}
+}
+
+internal class DummyObjectWithReadOnlyProperty
+{
+	private var _fieldA : String;
+	
+	public function get fieldA() : String
+	{
+		return _fieldA;
 	}
 }

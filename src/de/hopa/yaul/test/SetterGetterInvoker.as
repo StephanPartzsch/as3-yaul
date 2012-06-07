@@ -74,6 +74,9 @@ package de.hopa.yaul.test
 
 		private function invokeSettersAndGetters( fields : Array ) : Boolean
 		{
+			if ( fields.length == 0 )
+				return false;
+			
 			for each ( var fieldName : String in fields )
 			{
 				_currentFieldName = fieldName;
@@ -187,7 +190,12 @@ package de.hopa.yaul.test
 			var fields : Array = [];
 			
 			for each ( var propertyInfo : MemberInfo in properties )
-				fields.push( propertyInfo.name );
+			{
+				if ( !( propertyInfo is PropertyInfo ) )
+					fields.push( propertyInfo.name );
+				else if ( PropertyInfo( propertyInfo ).canWrite )
+					fields.push( propertyInfo.name );
+			}
 				
 			for each ( var methodInfo : MethodInfo in methods )
 			{
