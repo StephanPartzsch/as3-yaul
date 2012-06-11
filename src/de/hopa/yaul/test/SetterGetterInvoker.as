@@ -213,7 +213,7 @@ package de.hopa.yaul.test
 		{
 			var description : XML = describeType( memberInfo.owner.classDefinition );
 			
-			for each ( var constant : XML in description..constant )
+			for each ( var constant : XML in description.descendants( "constant" ) )
 			{
 				if ( constant.@name == memberInfo.name )
 					return true;
