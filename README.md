@@ -14,6 +14,17 @@ Yaul contains so far the following functionality:
 
 * **ClickCatcher**  - a Sprite that listens for addedToStage, removedFromStage and resize events and  draws an invisible hitarea to catch all mouse events
 
+
+### package math
+
+This package contains functions which are well known from the flash [Math class](http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/Math.html), but they operate much faster.
+
+* **abs** - Returns the absolute value for the number specified by the parameter *value*.
+* **ceil** - Returns the ceiling of the number specified by the parameter *value*.
+* **floor** - Returns the floor of the number specified in the parameter *value*.
+* **round** - Returns the rounded value for the number specified by the parameter *value* (up or down to the nearest integer).
+
+
 ### package test 
 
 * **hasValidSetterAndGetter** - tests if all getter and setter of an object work as expected
