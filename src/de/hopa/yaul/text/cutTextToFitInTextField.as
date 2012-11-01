@@ -2,11 +2,16 @@ package de.hopa.yaul.text
 {
 	import flash.text.TextField;
 
-	public function cutTextToFitInTextField( textField : TextField, maxTextWidth : Number, maxTextHeight : Number, assignCuttedText : Boolean = true  ) : String
+	public function cutTextToFitInTextField( textField : TextField, text : String = "", assignCuttedText : Boolean = true, maxTextWidth : Number = -1, maxTextHeight : Number = -1 ) : String
 	{
-		var oldText : String = textField.text;
-		var newText : String = textField.text;
+		var oldText : String = ( text == "") ? textField.text : text;
+		var newText : String = ( text == "") ? textField.text : text;
 		var cutOffset : int = 20;
+		
+		textField.text = oldText;
+		
+		maxTextWidth = maxTextWidth <= 0 ? textField.width : maxTextWidth;
+		maxTextHeight = maxTextHeight <= 0 ? textField.height : maxTextHeight;
 
 		while ( textField.textWidth > maxTextWidth || textField.textHeight > maxTextHeight )
 		{

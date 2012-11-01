@@ -13,6 +13,6 @@ package de.hopa.yaul.text
 		var textFitsInTextField : Boolean = decreaseFontSizeToFitInTextField( textField, minFontSize, maxTextHeight, maxTextHeight );
 		
 		if( textFitsInTextField == false )
-			cutTextToFitInTextField( textField, maxTextWidth, maxTextHeight );
+			cutTextToFitInTextField( textField, "", true, maxTextWidth, maxTextHeight );
 	}
 }
