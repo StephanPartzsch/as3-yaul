@@ -31,48 +31,65 @@ package de.hopa.yaul.text
 		public function test_cut_name_with_long_name() : void
 		{
 			textField.text = "Hans Wuerstchen"; 
-			cutTextToFitInTextField( textField, textField.width, textField.height );
+			var returnedCuttedText : String = cutTextToFitInTextField( textField, textField.width, textField.height );
 
 			var expectedText : String = "Hans W...";
-			var cuttedText : String = textField.text;
+			var newTextFieldText : String = textField.text;
 
-			assertEquals( "unexpected cutted name", expectedText, cuttedText );
+			assertEquals( "unexpected cutted name", expectedText, newTextFieldText );
+			assertEquals( "unexpected cutted name", expectedText, returnedCuttedText );
 		}
 
 		[Test]
 		public function test_cut_name_with_short_name() : void
 		{
 			textField.text = "Hans";
-			cutTextToFitInTextField( textField, textField.width, textField.height );
+			var returnedCuttedText : String = cutTextToFitInTextField( textField, textField.width, textField.height );
 
 			var expectedText : String = "Hans";
-			var cuttedText : String = textField.text;
+			var newTextFieldText : String = textField.text;
 
-			assertEquals( "unexpected cutted name", expectedText, cuttedText );
+			assertEquals( "unexpected cutted name", expectedText, newTextFieldText );
+			assertEquals( "unexpected cutted name", expectedText, returnedCuttedText );
 		}
 
 		[Test]
 		public function test_cut_name_with_no_name() : void
 		{
 			textField.text = "";
-			cutTextToFitInTextField( textField, textField.width, textField.height );
+			var returnedCuttedText : String = cutTextToFitInTextField( textField, textField.width, textField.height );
 
 			var expectedText : String = "";
-			var cuttedText : String = textField.text;
+			var newTextFieldText : String = textField.text;
 
-			assertEquals( "unexpected cutted name", expectedText, cuttedText );
+			assertEquals( "unexpected cutted name", expectedText, newTextFieldText );
+			assertEquals( "unexpected cutted name", expectedText, returnedCuttedText );
 		}
 
 		[Test]
 		public function test_cut_name_with_numbers() : void
 		{
 			textField.text = "123456789";
-			cutTextToFitInTextField( textField, textField.width, textField.height );
+			var returnedCuttedText : String = cutTextToFitInTextField( textField, textField.width, textField.height );
 
 			var expectedText : String = "123456...";
-			var cuttedText : String = textField.text;
+			var newTextFieldText : String = textField.text;
 
-			assertEquals( "unexpected cutted name", expectedText, cuttedText );
+			assertEquals( "unexpected cutted name", expectedText, newTextFieldText );
+			assertEquals( "unexpected cutted name", expectedText, returnedCuttedText );
+		}
+		
+		[Test]
+		public function test_cut_name_without_assignation_to_textfield() : void
+		{
+			textField.text = "Hans Wuerstchen"; 
+			var returnedCuttedText : String = cutTextToFitInTextField( textField, textField.width, textField.height, false );
+
+			var expectedText : String = "Hans W...";
+			var newTextFieldText : String = textField.text;
+
+			assertEquals( "unexpected cutted name", "Hans Wuerstchen", newTextFieldText );
+			assertEquals( "unexpected cutted name", expectedText, returnedCuttedText );
 		}
 	}
 }

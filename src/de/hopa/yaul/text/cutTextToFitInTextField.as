@@ -2,7 +2,7 @@ package de.hopa.yaul.text
 {
 	import flash.text.TextField;
 
-	public function cutTextToFitInTextField( textField : TextField, maxTextWidth : Number, maxTextHeight : Number  ) : void
+	public function cutTextToFitInTextField( textField : TextField, maxTextWidth : Number, maxTextHeight : Number, assignCuttedText : Boolean = true  ) : String
 	{
 		var oldText : String = textField.text;
 		var newText : String = textField.text;
@@ -15,5 +15,10 @@ package de.hopa.yaul.text
 			cutOffset--;
 			textField.text = newText;
 		}
+		
+		if ( assignCuttedText == false )
+			textField.text = oldText;
+		
+		return newText;
 	}
 }
