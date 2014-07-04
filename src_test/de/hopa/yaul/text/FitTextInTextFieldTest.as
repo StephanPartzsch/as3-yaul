@@ -33,7 +33,7 @@ package de.hopa.yaul.text
 			textField.text = "Hans Hansen rocks the world!";
 			fitTextInTextField( textField, 8 );
 
-			var expectedText : String = "Hans Hansen rocks the world!";
+			var expectedText : String = "Hans Hansen ...";
 			var cuttedText : String = textField.text;
 			var finalFontSize : int = int( textField.getTextFormat().size );
 

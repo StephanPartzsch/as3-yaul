@@ -6,7 +6,7 @@ package de.hopa.yaul.text
 	{
 		var oldText : String = ( text == "") ? textField.text : text;
 		var newText : String = ( text == "") ? textField.text : text;
-		var cutOffset : int = 20;
+		var cutOffset : int = 1;
 		
 		textField.text = oldText;
 		
@@ -15,9 +15,9 @@ package de.hopa.yaul.text
 
 		while ( textField.textWidth > maxTextWidth || textField.textHeight > maxTextHeight )
 		{
-			newText = oldText.slice( 0, cutOffset );
+			newText = oldText.slice( 0, oldText.length - cutOffset );
 			newText += "...";
-			cutOffset--;
+			cutOffset++;
 			textField.text = newText;
 		}
 		

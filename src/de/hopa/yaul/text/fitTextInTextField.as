@@ -10,7 +10,7 @@ package de.hopa.yaul.text
 		textField.width = ( textField.width < maxTextWidth ) ? maxTextWidth : textField.width;
 		textField.height = ( textField.height < maxTextHeight ) ? maxTextHeight : textField.height;
 		
-		var textFitsInTextField : Boolean = decreaseFontSizeToFitInTextField( textField, minFontSize, maxTextHeight, maxTextHeight );
+		var textFitsInTextField : Boolean = decreaseFontSizeToFitInTextField( textField, minFontSize, maxTextWidth, maxTextHeight );
 		
 		if( textFitsInTextField == false )
 			cutTextToFitInTextField( textField, "", true, maxTextWidth, maxTextHeight );
